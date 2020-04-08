@@ -1,1 +1,11 @@
-spring
+server:
+  port: 8080
+
+spring:
+  application:
+    name: testConfigServer
+  cloud:
+    config:
+      server:
+        git: #仓库地址
+          uri: https://github.com/nasuiyile/cloud-test.git
