@@ -1,0 +1,35 @@
+server:
+  port: 5000
+eureka:
+  client:
+    serviceUrl:
+        #eureka服务端提供的注册地址 参考服务端配置的这个路径
+        defaultZone: http://eureka:3000/eureka,http://eureka1:3001/eureka,http://eureka2:3000/eureka2
+  instance:
+    instance-id: user-1 #此实例注册到eureka服务端的唯一的实例ID
+    prefer-ip-address: true #是否显示IP地址
+    #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒 (与下面配置的单位都是秒)
+    leaseRenewalIntervalInSeconds: 1
+    #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
+    leaseExpirationDurationInSeconds: 3
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000 #设置超时时长
+      circuitBreaker:
+        requestVolumeThreshold: 5   #  10秒种访问5次都失败的话, 会断开服务,不调用方法,直接进入fallback
+        sleepWindowInMilliseconds : 5000   #默认是5秒 5秒后尝试再访问一次服务器
+
+feign:
+  hystrix:
+    enabled: true #开启feign当中的hystrix
+
+
+spring:
+  application:
+    name: client-user #此实例注册到eureka服务端的name
+

@@ -1,0 +1,19 @@
+server:
+  port: 3001
+eureka:
+  server:
+    enable-self-preservation: false  #关闭自我保护机制
+    eviction-interval-timer-in-ms: 4000 #设置清理间隔（单位：毫秒 默认是60*1000）
+  instance:
+    hostname: eureka1
+
+
+  client:
+    registerWithEureka: true #把自己作为一个客户端注册到自己身上
+    fetchRegistry: true  #要从服务端获取注册信息
+    serviceUrl: #微服务要注册到的地址.
+      defaultZone: http://eureka:3000/eureka,http://eureka2:3002/eureka
+
+spring:
+  application:
+    name: eurekaServer
