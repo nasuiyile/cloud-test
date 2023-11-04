@@ -15,6 +15,7 @@ eureka:
     leaseRenewalIntervalInSeconds: 10
     #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
     leaseExpirationDurationInSeconds: 30
+
 hystrix:
   command:
     default:
@@ -28,9 +29,11 @@ hystrix:
   threadpool:
     default:
       coreSize: 10 #限流个数,线程池的个数
+
 feign:
   hystrix:
     enabled: true #开启feign当中的hystrix
 ribbon:
   ReadTimeout: 10000
   Connectimeout: 10000
+# 这是一段注释
